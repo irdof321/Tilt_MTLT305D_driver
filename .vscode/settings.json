@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.py": "python",
+        "xstring": "cpp",
+        "xutility": "cpp"
+    }
+}

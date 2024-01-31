@@ -1,0 +1,51 @@
+interface IMU {
+    {abstract} + readData(IMULowData : *IMUPacket) -> void;
+    + getData() -> IMULData;
+    + init() -> void;
+
+    - _lowLevel : *IMULowLevel;
+    - _data_queue : *Queue < *IMUData >;
+}
+
+interface IMULowLevel {
+    + getResponse(callback : (IMULowData : *IMUPacket) -> void*) -> void;
+    + sendCommand(command : *IMULowLevelPacket) -> void;
+    {abstract} + updateData() -> void; //loop until data is got
+
+
+    - _serial : *serialib;
+    - _data_queue : *Queue < *IMULowLevelData >;
+    - _serial_queue : *Queue < *byte >;
+}
+
+class IMULowLevelMtlt305d implements IMULowLevel {
+    - readAncienna() -> bool;
+
+}
+
+interface IMULowLevelPacket {
+    
+}
+
+interface IMUPacket {
+    
+}
+
+class serialib {
+
+}
+
+class IMULowLevelPacketMtlt305d implements IMULowLevelPacket {
+    + packet_type : unsigned short;
+    + packet_length : char;
+    + packet_data : char[256];
+    + packet_checksum : char;    
+}
+
+class IMUMtlt305d implements IMU {
+    + ping() -> uint8_t;
+    + echo(cahr* data, uint8_t length) -> void;
+    + getFirmwareVersion() -> uint8_t;
+    + test() -> void;
+    + getAngleData() -> IMUData;
+}
